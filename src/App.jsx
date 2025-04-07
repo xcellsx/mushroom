@@ -16,7 +16,6 @@ function App() {
         <Route path="/growth-simulation" element={<GrowthSimulation />} />
         <Route path="/growth-report" element={<GrowthReport />} /> {/* New Route */}
         <Route path="/growth-history" element={<GrowthHistory />} />
-
       </Routes>
     </Router>
   );
