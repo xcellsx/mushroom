@@ -1,0 +1,119 @@
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.growth-simulation {
+    background-color: var(--darkgreen);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    text-align: center;
+  }
+  
+  .simulation-header h1 {
+    font-size: 5rem;
+    margin-bottom: 1em;
+    font-family: "Luckiest Guy", cursive;
+  }
+  
+  .simulation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    width: 80%;
+  }
+
+  .simulation-info {
+    display: flex;
+    flex-direction: row;
+    width: 80%
+  }
+  
+  .chosen-conditions {
+    background-color: var(--white);
+    color: var(--darkgreen);
+    padding: 1.5em;
+    border-radius: 10px;
+    text-align: left;
+    width: 50%;
+  }
+  
+  .chosen-conditions h3 {
+    color: var(--orange);
+    font-family: "Luckiest Guy", cursive;
+    font-size: 3rem;
+    margin: 0;
+    margin-bottom: 1em;
+    padding: 0;
+  }
+  
+  .chosen-conditions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .chosen-conditions li {
+    font-size: 1.2rem;
+    margin-bottom: 0.5em;
+  }
+  
+  .simulation-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    font-size: 1.2rem;
+    text-align: left;
+    margin-left: 2em;
+  }
+  
+  .simulation-results p {
+    color: var(--orange);
+    font-weight: bold;
+  }
+  
+  .growth-animation {
+    background-color: var(--lightgreen);
+    padding: 2em;
+    border-radius: 10px;
+    width: 25%;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  img {
+    width: 50%;
+    border-radius: 10px;
+  }
+  
+  .view-report-button {
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+    padding: 0.5em 1.5em;
+    font-size: 1rem;
+    border-radius: 5em;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .back-button {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 1em;
+  }
+  
+  .simulation-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }

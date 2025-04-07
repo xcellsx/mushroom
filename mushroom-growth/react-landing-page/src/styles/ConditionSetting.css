@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Luckiest+Guy&display=swap');
+
+:root {
+    --darkgreen: #245921;
+    --lightgreen: #7E9777;
+    --white: #FFF6F6;
+    --orange: #FF914D; 
+}
+
+.condition-setting {
+    background-color: var(--darkgreen);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    text-align: center;
+}
+  
+.condition-header h1 {
+    font-size: 5rem;
+    font-family: "Luckiest Guy", cursive;
+    margin: 0
+}
+  
+.condition-content {
+    font-size: 1.2rem;
+}
+  
+.start-button {
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+    padding: 0.5em 1.5em;
+    font-size: 1rem;
+    border-radius: 5em;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 2.5em;
+}
+
+h3 {
+    color: var(--orange);
+    font-family: "Luckiest Guy", cursive;
+    font-size: 3rem;
+    margin: 0.8em;
+}
+
+.sliders {
+    display: flex;
+    flex-direction: column;
+    margin: 1em 0;
+    width: 100%;
+}
+  
+.sliders div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.substrate-labels {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
+    gap: 1em; /* Add spacing between rows and columns */
+    width: 100%; /* Ensure it spans the container width */
+    align-items: center; /* Vertically align items */
+    margin-top: 1em; /* Add spacing between the header and sliders */
+    margin-bottom: 1em;
+}
+
+.substrate-labels div {
+    display: flex;
+    align-items: center;
+    gap: 1em; /* Add spacing between label and input */
+    margin-bottom: 1em;
+  }
+  
+  .substrate-labels input[type="number"] {
+    width: 60px; /* Set a fixed width for the input */
+    padding: 0.5em;
+    border: 1px solid var(--lightgreen);
+    border-radius: 5px;
+    text-align: center;
+  }
+
+label {
+    font-size: 1.2rem;
+    white-space: nowrap; /* Prevent the label text from wrapping */
+    margin-right: 1em; /* Add spacing between the label and slider */
+}
+
+input[type="range"] {
+    flex: 1; /* Allow the slider to take up the remaining space */
+    width: auto; /* Ensure the slider adjusts dynamically */
+}
+  
+.pie-chart {
+    flex: 1; /* Allow the chart to take up equal space */
+    margin: 0; /* Remove default margin */
+    width: 50%; /* Ensure it fits within its container */
+    display: flex;
+    justify-content: center;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 1em;
+  }
+  
+  .condition-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
