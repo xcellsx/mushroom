@@ -1,90 +1,182 @@
 .growth-report {
-    background-color: var(--darkgreen);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--white);
-    text-align: center;
-  }
-  
+  background-color: var(--darkgreen);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  text-align: center;
+}
+
+.report-header {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.report-header h1 {
+  font-size: 5rem;
+  margin-bottom: 1em;
+  font-family: "Luckiest Guy", cursive;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 1em;
+}
+
+.report-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  width: 80%;
+}
+
+.yield-chart {
+  text-align: center;
+}
+
+.chart-placeholder {
+  background-color: var(--lightgreen);
+  padding: 2em;
+  border-radius: 10px;
+  width: 50%;
+  font-size: 1.2rem;
+}
+
+.chosen-conditions {
+  text-align: left;
+  width: 50%;
+}
+
+.chosen-conditions h3 {
+  color: var(--orange);
+  font-family: "Luckiest Guy", cursive;
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+}
+
+.chosen-conditions table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.chosen-conditions td {
+  padding: 0.5em;
+  border: 1px solid var(--white);
+  font-size: 1.2rem;
+}
+
+.home-button {
+  background-color: var(--orange);
+  color: var(--white);
+  border: none;
+  padding: 0.5em 1.5em;
+  font-size: 1rem;
+  border-radius: 5em;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For small devices (mobile phones) */
+@media (max-width: 600px) {
   .report-header h1 {
-    font-size: 5rem;
-    margin-bottom: 1em;
-    font-family: "Luckiest Guy", cursive;
-  }
-  
-  .report-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2em;
-    width: 80%;
-  }
-  
-  .yield-chart {
-    text-align: center;
-  }
-  
-  .chart-placeholder {
-    background-color: var(--lightgreen);
-    padding: 2em;
-    border-radius: 10px;
-    width: 50%;
-    font-size: 1.2rem;
-  }
-  
-  .chosen-conditions {
-    text-align: left;
-    width: 50%;
-  }
-  
-  .chosen-conditions h3 {
-    color: var(--orange);
-    font-family: "Luckiest Guy", cursive;
-    font-size: 1.5rem;
-    margin-bottom: 1em;
-  }
-  
-  .chosen-conditions table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .chosen-conditions td {
-    padding: 0.5em;
-    border: 1px solid var(--white);
-    font-size: 1.2rem;
+      font-size: 3rem; /* Reduce font size for smaller screens */
   }
 
-  .back-button {
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-right: 1em;
+  .chart-placeholder {
+      width: 80%; /* Adjust chart size for smaller screens */
+      padding: 1.5em; /* Adjust padding for smaller screens */
+      font-size: 1rem; /* Reduce font size */
   }
-  
-  .report-header {
-    display: flex;
-    align-items: center;
-    gap: 1em;
+
+  .chosen-conditions {
+      width: 90%; /* Expand chosen conditions to fit smaller screens */
+  }
+
+  .chosen-conditions h3 {
+      font-size: 1.2rem; /* Reduce font size for smaller screens */
+  }
+
+  .chosen-conditions td {
+      font-size: 1rem; /* Adjust table font size */
   }
 
   .home-button {
-    background-color: var(--orange);
-    color: var(--white);
-    border: none;
-    padding: 0.5em 1.5em;
-    font-size: 1rem;
-    border-radius: 5em;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 2em;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2em;
+      font-size: 0.9rem; /* Adjust button font size */
+      padding: 0.4em 1em; /* Adjust button padding */
   }
+}
+
+/* For medium devices (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .report-header h1 {
+      font-size: 4rem; /* Slightly smaller font size for tablets */
+  }
+
+  .chart-placeholder {
+      width: 70%; /* Adjust chart size for tablets */
+      padding: 1.8em; /* Adjust padding for tablets */
+      font-size: 1.1rem; /* Adjust font size */
+  }
+
+  .chosen-conditions {
+      width: 70%; /* Adjust chosen conditions width for tablets */
+  }
+
+  .chosen-conditions h3 {
+      font-size: 1.4rem; /* Adjust font size for tablets */
+  }
+
+  .chosen-conditions td {
+      font-size: 1.1rem; /* Adjust table font size */
+  }
+
+  .home-button {
+      font-size: 1rem; /* Adjust button font size */
+      padding: 0.5em 1.2em; /* Adjust button padding */
+  }
+}
+
+/* For large devices (desktops) */
+@media (min-width: 1025px) {
+  .report-header h1 {
+      font-size: 5rem; /* Keep large font size for desktops */
+  }
+
+  .chart-placeholder {
+      width: 50%; /* Keep chart size for desktops */
+      padding: 2em; /* Keep padding for desktops */
+      font-size: 1.2rem; /* Keep font size for desktops */
+  }
+
+  .chosen-conditions {
+      width: 50%; /* Keep chosen conditions width for desktops */
+  }
+
+  .chosen-conditions h3 {
+      font-size: 1.5rem; /* Keep font size for desktops */
+  }
+
+  .chosen-conditions td {
+      font-size: 1.2rem; /* Keep table font size */
+  }
+
+  .home-button {
+      font-size: 1.2rem; /* Slightly larger buttons for desktops */
+      padding: 0.6em 1.5em; /* Adjust button padding */
+  }
+}

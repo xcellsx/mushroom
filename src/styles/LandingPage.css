@@ -5,21 +5,21 @@
     --lightgreen: #7E9777;
     --white: #FFF6F6;
     --orange: #FF914D; 
-  }
+}
   
-  body {
+body {
     margin: 0;
     font-family: "Comfortaa", sans-serif;
     background-color: var(--background-color);
-  }
+}
   
-  .container {
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-  }
+}
 
 .landing-page {
     background-color: var(--darkgreen);
@@ -33,18 +33,18 @@
     align-items: center;
     color: var(--white);
     text-align: center;
-  }
+}
   
-  .landing-header h1 {
+.landing-header h1 {
     font-size: 5rem;
     margin-bottom: 0.5em;
     text-transform: uppercase;
     font-family: "Luckiest Guy", cursive;
     font-weight: 400;
     font-style: normal;
-  }
-  
-  .start-button {
+}
+
+.start-button {
     background-color: var(--orange);
     color: var(--white);
     border: none;
@@ -52,11 +52,11 @@
     font-size: 1em;
     border-radius: 5em;
     cursor: pointer;
-    font-weight:bold;
-    margin-bottom: 1em
-  }
+    font-weight: bold;
+    margin-bottom: 1em;
+}
 
-  .view-history-button {
+.view-history-button {
     background-color: var(--lightgreen);
     color: var(--darkgreen);
     border: none;
@@ -66,4 +66,46 @@
     cursor: pointer;
     font-weight: bold;
     margin-top: 1em;
-  }
+}
+
+/* Media Queries for Responsiveness */
+
+/* For small devices (mobile phones) */
+@media (max-width: 600px) {
+    .landing-header h1 {
+        font-size: 3rem; /* Reduce font size for smaller screens */
+    }
+
+    .start-button, .view-history-button {
+        font-size: 0.9rem; /* Adjust button font size */
+        padding: 0.4em 1em; /* Adjust button padding */
+    }
+
+    .landing-page {
+        padding: 1em; /* Add padding for smaller screens */
+    }
+}
+
+/* For medium devices (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .landing-header h1 {
+        font-size: 4rem; /* Slightly smaller font size for tablets */
+    }
+
+    .start-button, .view-history-button {
+        font-size: 1rem; /* Adjust button font size */
+        padding: 0.5em 1.2em; /* Adjust button padding */
+    }
+}
+
+/* For large devices (desktops) */
+@media (min-width: 1025px) {
+    .landing-header h1 {
+        font-size: 5rem; /* Keep large font size for desktops */
+    }
+
+    .start-button, .view-history-button {
+        font-size: 1.2rem; /* Slightly larger buttons for desktops */
+        padding: 0.6em 1.5em; /* Adjust button padding */
+    }
+}

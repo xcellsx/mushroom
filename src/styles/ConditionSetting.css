@@ -15,12 +15,13 @@
     align-items: center;
     color: var(--white);
     text-align: center;
+    padding: 1em; /* Add padding for smaller screens */
 }
   
 .condition-header h1 {
     font-size: 5rem;
     font-family: "Luckiest Guy", cursive;
-    margin: 0
+    margin: 0;
 }
   
 .condition-content {
@@ -84,15 +85,15 @@ h3 {
     align-items: center;
     gap: 1em; /* Add spacing between label and input */
     margin-bottom: 1em;
-  }
+}
   
-  .substrate-labels input[type="number"] {
+.substrate-labels input[type="number"] {
     width: 60px; /* Set a fixed width for the input */
     padding: 0.5em;
     border: 1px solid var(--lightgreen);
     border-radius: 5px;
     text-align: center;
-  }
+}
 
 label {
     font-size: 1.2rem;
@@ -120,10 +121,80 @@ input[type="range"] {
     font-size: 1.5rem;
     cursor: pointer;
     margin-right: 1em;
-  }
+}
   
-  .condition-header {
+.condition-header {
     display: flex;
     align-items: center;
     gap: 1em;
-  }
+}
+
+/* Media Queries for Responsiveness */
+
+/* For small devices (mobile phones) */
+@media (max-width: 600px) {
+    .condition-header h1 {
+        font-size: 3rem; /* Reduce font size for smaller screens */
+    }
+
+    h3 {
+        font-size: 2rem; /* Reduce font size for smaller screens */
+    }
+
+    .start-button {
+        font-size: 0.9rem; /* Adjust button font size */
+        padding: 0.4em 1em; /* Adjust button padding */
+    }
+
+    .substrate-labels {
+        grid-template-columns: 1fr; /* Stack inputs vertically */
+    }
+
+    .pie-chart {
+        width: 80%; /* Adjust chart size for smaller screens */
+    }
+}
+
+/* For medium devices (tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .condition-header h1 {
+        font-size: 4rem; /* Slightly smaller font size for tablets */
+    }
+
+    h3 {
+        font-size: 2.5rem; /* Adjust font size for tablets */
+    }
+
+    .start-button {
+        font-size: 1rem; /* Adjust button font size */
+        padding: 0.5em 1.2em; /* Adjust button padding */
+    }
+
+    .substrate-labels {
+        grid-template-columns: repeat(2, 1fr); /* Keep two columns for tablets */
+    }
+
+    .pie-chart {
+        width: 60%; /* Adjust chart size for tablets */
+    }
+}
+
+/* For large devices (desktops) */
+@media (min-width: 1025px) {
+    .condition-header h1 {
+        font-size: 5rem; /* Keep large font size for desktops */
+    }
+
+    h3 {
+        font-size: 3rem; /* Keep large font size for desktops */
+    }
+
+    .start-button {
+        font-size: 1.2rem; /* Slightly larger buttons for desktops */
+        padding: 0.6em 1.5em; /* Adjust button padding */
+    }
+
+    .pie-chart {
+        width: 50%; /* Keep chart size for desktops */
+    }
+}
