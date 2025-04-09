@@ -16,6 +16,42 @@ const GrowthHistory = () => {
     navigate('/'); // Navigate back to the Landing Page
   };
 
+  // Map keys to display names
+  const displayNames = {
+    riceBran: 'Rice Bran',
+    corn: 'Corn Cob',
+    sugarcane: 'Sugarcane',
+    sawdust: 'Sawdust',
+  };
+
+  const formatSubstrate = (substrate) => {
+    let parsedSubstrate;
+  
+    try {
+      // Try to parse the substrate as JSON
+      parsedSubstrate = JSON.parse(substrate);
+    } catch (error) {
+      // If parsing fails, assume it's already formatted as a string
+      return substrate;
+    }
+  
+    // Map keys to display names
+    const displayNames = {
+      riceBran: 'Rice Bran',
+      corn: 'Corn Cob',
+      sugarcane: 'Sugarcane',
+      sawdust: 'Sawdust',
+    };
+  
+    return Object.entries(parsedSubstrate)
+      .map(([key, value]) => `${displayNames[key] || key}: ${value}g`)
+      .join(', ');
+  };
+
+  const handleEntryClick = (entry) => {
+    navigate('/growth-report', { state: { entry } }); // Navigate to GrowthReport.jsx with entry data
+  };
+
   return (
     <div className="growth-history">
       <header className="history-header">
@@ -29,11 +65,16 @@ const GrowthHistory = () => {
         <div className="history-list">
           {history.length > 0 ? (
             history.map((entry, index) => (
-              <div className="history-item" key={index}>
+              <div
+                className="history-item"
+                key={index}
+                onClick={() => handleEntryClick(entry)} // Make the entry clickable
+                style={{ cursor: 'pointer' }} // Add a pointer cursor for better UX
+              >
                 <div className="history-details">
                   <p><strong># of Days:</strong> {entry.days}</p>
                   <p><strong>Yield:</strong> {entry.yield}</p>
-                  <p>{entry.substrate} | {entry.conditions}</p>
+                  <p>{formatSubstrate(entry.substrate)} | {entry.conditions}</p>
                 </div>
                 <div className="history-date">
                   <p><strong>Date:</strong> {entry.date}</p>

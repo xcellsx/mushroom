@@ -1,247 +1,262 @@
-main {
-  display: flex;
-  flex-direction: column;
-}
-
-.growth-simulation {
-  background-color: var(--darkgreen);
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--white);
-  text-align: center;
-}
-
-.simulation-header h1 {
-  font-size: 5rem;
-  margin-bottom: 1em;
-  font-family: "Luckiest Guy", cursive;
-}
-
-.simulation-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2em;
-  width: 80%;
-}
-
-.simulation-info {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-  gap: 2em;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-}
-
-.chosen-conditions {
-  background-color: var(--white);
-  color: var(--darkgreen);
-  padding: 1.5em;
-  border-radius: 10px;
-  text-align: left;
-  width: 50%;
-}
-
-.chosen-conditions h3 {
-  color: var(--orange);
-  font-family: "Luckiest Guy", cursive;
-  font-size: 3rem;
-  margin: 0;
-  margin-bottom: 1em;
-  padding: 0;
-}
-
-.chosen-conditions ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.chosen-conditions li {
-  font-size: 1.2rem;
-  margin-bottom: 0.5em;
-}
-
-.simulation-results {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 50%;
-  font-size: 1.2rem;
-  text-align: left;
-  margin-left: 2em;
-}
-
-.simulation-results p {
-  color: var(--orange);
-  font-weight: bold;
-}
-
-.growth-animation {
-  background-color: var(--lightgreen);
-  padding: 2em;
-  border-radius: 10px;
-  width: 25%;
-  text-align: center;
-  font-size: 1.2rem;
-}
-
-img {
-  width: 50%;
-  border-radius: 10px;
-}
-
-.view-report-button {
-  background-color: var(--orange);
-  color: var(--white);
-  border: none;
-  padding: 0.5em 1.5em;
-  font-size: 1rem;
-  border-radius: 5em;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.back-button {
-  background: none;
-  border: none;
-  color: var(--white);
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-right: 1em;
-}
-
-.simulation-header {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-}
-
-/* Media Queries for Responsiveness */
-
-/* For small devices (mobile phones) */
-@media (max-width: 600px) {
-  .simulation-header h1 {
-      font-size: 3rem; /* Reduce font size for smaller screens */
+  main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
   }
 
+  .growth-simulation {
+    background-color: var(--darkgreen);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    text-align: center;
+  }
+
+  .simulation-header h1 {
+    font-size: 5rem;
+    margin-bottom: 1em;
+    font-family: "Luckiest Guy", cursive;
+  }
+
+  .simulation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
+    width: 80%;
+  }
+
+  .graph {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    }
+
   .simulation-info {
-      flex-direction: column; /* Stack items vertically */
-      gap: 1em; /* Reduce gap between items */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    width: 100%;
   }
 
   .chosen-conditions {
-      width: 90%; /* Expand chosen conditions to fit smaller screens */
-      padding: 1em; /* Adjust padding */
+    background-color: var(--white);
+    color: var(--darkgreen);
+    padding: 1.5em;
+    border-radius: 10px;
+    text-align: left;
+    width: 50%;
   }
 
   .chosen-conditions h3 {
-      font-size: 2rem; /* Reduce font size for smaller screens */
+    color: var(--orange);
+    font-family: "Luckiest Guy", cursive;
+    font-size: 3rem;
+    margin: 0;
+    margin-bottom: 1em;
+    padding: 0;
+  }
+
+  .chosen-conditions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
   }
 
   .chosen-conditions li {
-      font-size: 1rem; /* Adjust font size */
+    font-size: 1.2rem;
+    margin-bottom: 0.5em;
   }
 
   .simulation-results {
-      width: 90%; /* Expand simulation results to fit smaller screens */
-      margin-left: 0; /* Remove left margin */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    font-size: 1.2rem;
+    text-align: left;
+    margin-left: 2em;
+  }
+
+  .simulation-results p {
+    color: var(--orange);
+    font-weight: bold;
   }
 
   .growth-animation {
-      width: 80%; /* Adjust animation size for smaller screens */
-      padding: 1em; /* Adjust padding */
+    background-color: var(--lightgreen);
+    padding: 2em;
+    border-radius: 10px;
+    width: 25%;
+    text-align: center;
+    font-size: 1.2rem;
   }
 
   img {
-      width: 80%; /* Adjust image size for smaller screens */
+    width: 50%;
+    border-radius: 10px;
   }
 
   .view-report-button {
-      font-size: 0.9rem; /* Adjust button font size */
-      padding: 0.4em 1em; /* Adjust button padding */
-  }
-}
-
-/* For medium devices (tablets) */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .simulation-header h1 {
-      font-size: 4rem; /* Slightly smaller font size for tablets */
-  }
-
-  .simulation-info {
-      flex-direction: row; /* Keep items in a row */
-      gap: 1.5em; /* Adjust gap between items */
+    background-color: var(--orange);
+    color: var(--white);
+    border: none;
+    padding: 0.5em 1.5em;
+    font-size: 1rem;
+    border-radius: 5em;
+    cursor: pointer;
+    font-weight: bold;
   }
 
-  .chosen-conditions {
-      width: 70%; /* Adjust chosen conditions width for tablets */
-      padding: 1.2em; /* Adjust padding */
+  .back-button {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 1em;
   }
 
-  .chosen-conditions h3 {
-      font-size: 2.5rem; /* Adjust font size for tablets */
+  .simulation-header {
+    display: flex;
+    align-items: center;
+    gap: 1em;
   }
 
-  .simulation-results {
-      width: 70%; /* Adjust simulation results width for tablets */
-      margin-left: 0; /* Remove left margin */
+  .selected-image{
+    width: 500px;
+    border-radius: 10px;
   }
 
-  .growth-animation {
-      width: 60%; /* Adjust animation size for tablets */
-      padding: 1.5em; /* Adjust padding */
+  canvas {
+    height: 250px;
   }
 
-  img {
-      width: 60%; /* Adjust image size for tablets */
+  /* Media Queries for Responsiveness */
+
+  /* For small devices (mobile phones) */
+  @media (max-width: 600px) {
+    .simulation-header h1 {
+        font-size: 3rem; /* Reduce font size for smaller screens */
+    }
+
+    .simulation-info {
+        flex-direction: column; /* Stack items vertically */
+        gap: 1em; /* Reduce gap between items */
+    }
+
+    .chosen-conditions {
+        width: 90%; /* Expand chosen conditions to fit smaller screens */
+        padding: 1em; /* Adjust padding */
+    }
+
+    .chosen-conditions h3 {
+        font-size: 2rem; /* Reduce font size for smaller screens */
+    }
+
+    .chosen-conditions li {
+        font-size: 1rem; /* Adjust font size */
+    }
+
+    .simulation-results {
+        width: 90%; /* Expand simulation results to fit smaller screens */
+        margin-left: 0; /* Remove left margin */
+    }
+
+    .growth-animation {
+        width: 80%; /* Adjust animation size for smaller screens */
+        padding: 1em; /* Adjust padding */
+    }
+
+    img {
+        width: 80%; /* Adjust image size for smaller screens */
+    }
+
+    .view-report-button {
+        font-size: 0.9rem; /* Adjust button font size */
+        padding: 0.4em 1em; /* Adjust button padding */
+    }
   }
 
-  .view-report-button {
-      font-size: 1rem; /* Adjust button font size */
-      padding: 0.5em 1.2em; /* Adjust button padding */
-  }
-}
+  /* For medium devices (tablets) */
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .simulation-header h1 {
+        font-size: 4rem; /* Slightly smaller font size for tablets */
+    }
 
-/* For large devices (desktops) */
-@media (min-width: 1025px) {
-  .simulation-header h1 {
-      font-size: 5rem; /* Keep large font size for desktops */
+    .simulation-info {
+        flex-direction: row; /* Keep items in a row */
+        gap: 1.5em; /* Adjust gap between items */
+    }
+
+    .chosen-conditions {
+        width: 70%; /* Adjust chosen conditions width for tablets */
+        padding: 1.2em; /* Adjust padding */
+    }
+
+    .chosen-conditions h3 {
+        font-size: 2.5rem; /* Adjust font size for tablets */
+    }
+
+    .simulation-results {
+        width: 70%; /* Adjust simulation results width for tablets */
+        margin-left: 0; /* Remove left margin */
+    }
+
+    .growth-animation {
+        width: 60%; /* Adjust animation size for tablets */
+        padding: 1.5em; /* Adjust padding */
+    }
+
+    img {
+        width: 60%; /* Adjust image size for tablets */
+    }
+
+    .view-report-button {
+        font-size: 1rem; /* Adjust button font size */
+        padding: 0.5em 1.2em; /* Adjust button padding */
+    }
   }
 
-  .simulation-info {
-      flex-direction: row; /* Keep items in a row */
-      gap: 2em; /* Keep gap between items */
-  }
+  /* For large devices (desktops) */
+  @media (min-width: 1025px) {
+    .simulation-header h1 {
+        font-size: 5rem; /* Keep large font size for desktops */
+    }
 
-  .chosen-conditions {
-      width: 50%; /* Keep chosen conditions width for desktops */
-      padding: 1.5em; /* Keep padding */
-  }
+    .simulation-info {
+        flex-direction: row; /* Keep items in a row */
+        gap: 2em; /* Keep gap between items */
+    }
 
-  .chosen-conditions h3 {
-      font-size: 3rem; /* Keep font size for desktops */
-  }
+    .chosen-conditions {
+        width: 50%; /* Keep chosen conditions width for desktops */
+        padding: 1.5em; /* Keep padding */
+    }
 
-  .simulation-results {
-      width: 50%; /* Keep simulation results width for desktops */
-      margin-left: 2em; /* Keep left margin */
-  }
+    .chosen-conditions h3 {
+        font-size: 3rem; /* Keep font size for desktops */
+    }
 
-  .growth-animation {
-      width: 25%; /* Keep animation size for desktops */
-      padding: 2em; /* Keep padding */
-  }
+    .simulation-results {
+        width: 50%; /* Keep simulation results width for desktops */
+        margin-left: 2em; /* Keep left margin */
+    }
 
-  img {
-      width: 50%; /* Keep image size for desktops */
-  }
+    .growth-animation {
+        width: 25%; /* Keep animation size for desktops */
+        padding: 2em; /* Keep padding */
+    }
 
-  .view-report-button {
-      font-size: 1.2rem; /* Slightly larger buttons for desktops */
-      padding: 0.6em 1.5em; /* Adjust button padding */
+    img {
+        width: 50%; /* Keep image size for desktops */
+    }
+
+    .view-report-button {
+        font-size: 1.2rem; /* Slightly larger buttons for desktops */
+        padding: 0.6em 1.5em; /* Adjust button padding */
+    }
   }
-}

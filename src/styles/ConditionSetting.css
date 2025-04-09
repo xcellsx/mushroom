@@ -16,16 +16,18 @@
     color: var(--white);
     text-align: center;
     padding: 1em; /* Add padding for smaller screens */
+    height: 100vh; /* Full  for the container */
 }
   
 .condition-header h1 {
     font-size: 5rem;
     font-family: "Luckiest Guy", cursive;
-    margin: 0;
+    margin-bottom: 0.5em;
 }
   
 .condition-content {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    width: 100%
 }
   
 .start-button {
@@ -37,20 +39,20 @@
     border-radius: 5em;
     cursor: pointer;
     font-weight: bold;
-    margin-top: 2.5em;
-}
+    margin: 1em;
+    }
 
 h3 {
     color: var(--orange);
     font-family: "Luckiest Guy", cursive;
     font-size: 3rem;
-    margin: 0.8em;
+    margin: 0.1em;
 }
 
 .sliders {
     display: flex;
     flex-direction: column;
-    margin: 1em 0;
+    margin: 0.2em 0;
     width: 100%;
 }
   
@@ -66,11 +68,11 @@ h3 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1em;
+    width: 100%;
 }
 
-.substrate-labels {
+.substrate-labels1 {
     display: grid; /* Use grid layout */
     grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
     gap: 1em; /* Add spacing between rows and columns */
@@ -80,10 +82,18 @@ h3 {
     margin-bottom: 1em;
 }
 
+.substrate-labels {
+    display: flex; /* Use grid layout */
+    width: 100%; /* Ensure it spans the container width */
+    align-items: center; /* Vertically align items */
+    flex-direction: row;
+    gap: 1em;
+    text-align: center;
+}
+
 .substrate-labels div {
     display: flex;
     align-items: center;
-    gap: 1em; /* Add spacing between label and input */
     margin-bottom: 1em;
 }
   
@@ -98,12 +108,47 @@ h3 {
 label {
     font-size: 1.2rem;
     white-space: nowrap; /* Prevent the label text from wrapping */
-    margin-right: 1em; /* Add spacing between the label and slider */
+    margin-right: 0.5em; /* Add spacing between the label and slider */
 }
 
 input[type="range"] {
-    flex: 1; /* Allow the slider to take up the remaining space */
-    width: auto; /* Ensure the slider adjusts dynamically */
+    -webkit-appearance: none; /* Remove default styling for WebKit browsers */
+    width: 100%; /* Full width */
+    height: 10px; /* Slider height */
+    background: var(--white); /* White background */
+    border-radius: 5px; /* Rounded corners */
+    outline: none; /* Remove outline */
+    border: 1px solid var(--lightgreen); /* Light green border */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling for WebKit browsers */
+    appearance: none; /* Remove default styling for other browsers */
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    background: var(--lightgreen); /* Light green slider thumb */
+    border-radius: 50%; /* Rounded thumb */
+    cursor: pointer; /* Change cursor to pointer */
+    border: 2px solid var(--darkgreen); /* Optional: Add a border for contrast */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    background: var(--lightgreen); /* Light green slider thumb */
+    border-radius: 50%; /* Rounded thumb */
+    cursor: pointer; /* Change cursor to pointer */
+    border: 2px solid var(--darkgreen); /* Optional: Add a border for contrast */
+}
+
+input[type="range"]::-ms-thumb {
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    background: var(--lightgreen); /* Light green slider thumb */
+    border-radius: 50%; /* Rounded thumb */
+    cursor: pointer; /* Change cursor to pointer */
+    border: 2px solid var(--darkgreen); /* Optional: Add a border for contrast */
 }
   
 .pie-chart {

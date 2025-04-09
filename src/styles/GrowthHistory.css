@@ -1,6 +1,5 @@
 .growth-history {
   background-color: var(--darkgreen);
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +12,7 @@
   align-items: center;
   gap: 1em;
   margin-top: 1em;
+  margin-bottom: 0;
 }
 
 .history-header h1 {
@@ -30,7 +30,8 @@
 
 .history-content {
   width: 80%;
-  margin-top: 2em;
+  margin: 2em 0em;
+  height: auto;
 }
 
 .history-content h3 {

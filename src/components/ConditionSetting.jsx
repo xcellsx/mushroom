@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useNavigate } from 'react-router-dom';
@@ -9,11 +9,14 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const ConditionSetting = () => {
   const navigate = useNavigate();
+
   const handleStartClick = () => {
-    // Save substrate and other conditions to localStorage
-    localStorage.setItem('substrate', JSON.stringify(substrate));
+    // Save substrate, conditions, and yield to localStorage
+    localStorage.setItem('substrate', JSON.stringify(substrate)); // Save as JSON
     localStorage.setItem('temperature', temperature);
     localStorage.setItem('ph', ph);
+    localStorage.setItem('yield', totalYield);
+  
     navigate('/growth-simulation'); // Navigate to the Growth Simulation page
   };
 
@@ -30,6 +33,15 @@ const ConditionSetting = () => {
     sawdust: 25,
   });
 
+  const [totalYield, setTotalYield] = useState(0);
+
+  const substrateLabels = {
+    riceBran: 'Rice Bran',
+    corn: 'Corn Cob', // Updated label
+    sugarcane: 'Sugarcane',
+    sawdust: 'Sawdust',
+  };
+
   const handleSubstrateChange = (key, value) => {
     const numericValue = parseInt(value, 10) || 0; // Ensure the value is a number
     setSubstrate((prev) => ({
@@ -38,13 +50,19 @@ const ConditionSetting = () => {
     }));
   };
 
+  useEffect(() => {
+    // Calculate the total yield whenever substrate values change
+    const total = Object.values(substrate).reduce((sum, weight) => sum + weight, 0);
+    setTotalYield(total);
+  }, [substrate]);
+
   const pieOptions = {
     plugins: {
       legend: {
         labels: {
-          color: '#FFF6F6', // Change this to your desired label color
+          color: '#FFF6F6',
           font: {
-            size: 14, // Optional: Adjust the font size
+            size: 14,
           },
         },
       },
@@ -52,7 +70,7 @@ const ConditionSetting = () => {
   };
 
   const pieData = {
-    labels: ['Rice Bran', 'Corn', 'Sugarcane', 'Sawdust'], // Updated labels
+    labels: Object.values(substrateLabels),
     datasets: [
       {
         data: Object.values(substrate),
@@ -103,7 +121,7 @@ const ConditionSetting = () => {
               {Object.keys(substrate).map((key) => (
                 <div key={key}>
                   <label>
-                    {key.charAt(0).toUpperCase() + key.slice(1)} (g):
+                    {substrateLabels[key]} (g):
                   </label>
                   <input
                     type="number"
@@ -116,6 +134,9 @@ const ConditionSetting = () => {
                 </div>
               ))}
             </div>
+          </div>
+          <div className="yield-display">
+            <h3>Total Yield: {totalYield}g</h3> {/* Display the total yield */}
           </div>
           <div className="pie-chart">
             <Pie data={pieData} options={pieOptions} />
