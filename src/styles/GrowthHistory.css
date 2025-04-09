@@ -5,6 +5,7 @@
   align-items: center;
   color: var(--white);
   text-align: center;
+  height: 100vh;
 }
 
 .history-header {
