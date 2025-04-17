@@ -1,262 +1,299 @@
-  main {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+/* src/styles/GrowthSimulation.css */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+:root {
+  /* Colors inspired by the image */
+  --bg-color: #FCFBF6; /* Very light creamy background */
+  --card-bg: #F6F5E9; /* Slightly darker cream for cards/containers */
+  --text-color-dark: #333; /* Dark text for contrast */
+  --text-color-medium: #555;
+  --text-color-light: #777;
+  --tab-active-border: #555; /* Border for active tab */
+  --results-value-bg: #E0E0E0; /* Background for result values */
+  --border-color: #EAEAE0; /* Subtle border for cards */
+  --shadow-color: rgba(0, 0, 0, 0.05);
+
+  /* Fonts */
+  --font-main: "Lexend", sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem;  /* 8px */
+  --spacing-md: 1rem;    /* 16px */
+  --spacing-lg: 1.5rem;  /* 24px */
+  --spacing-xl: 2rem;    /* 32px */
+  --spacing-xxl: 2.5rem; /* 40px */
+
+  /* Borders */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 10px var(--shadow-color);
+  --shadow-inner-soft: inset 0 1px 3px var(--shadow-color);
+}
+
+body {
+  font-family: var(--font-main);
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color-dark);
+  font-size: 16px; /* Base font size */
+}
+
+/* Main container */
+.growth-simulation {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  padding: var(--spacing-lg);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Header Section (Logo, Batch, Date) */
+.simulation-header {
+  width: 100%;
+  max-width: 1100px; /* Adjust max-width as needed */
+}
+
+.logobox {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Max width for the logo box */
+  margin: 3em 0; /* Space above logo */
+  margin-bottom: 1em;
+}
+
+.batch-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align text to top */
+  font-size: 0.875rem; /* text-sm */
+  color: var(--text-color-medium);
+  margin-top: var(--spacing-sm);
+}
+
+.batch-info .batch-name {
+    font-size: 1.5rem; /* Larger font size for Batch Name */
+    font-weight: 600;
+    color: var(--text-color-dark);
+}
+
+.batch-info .start-date {
+    /* Style for Start Date if needed */
+}
+
+
+/* Main Content Grid */
+.main-content-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile first: single column */
+  gap: var(--spacing-lg);
+  width: 100%;
+  max-width: 1100px; /* Consistent max width */
+}
+
+/* Shared Card Styles */
+.content-card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+  box-sizing: border-box; /* Include padding/border in size */
+}
+
+/* Left Column: Animation Placeholder */
+.animation-area {
+  /* Inherits .content-card styles */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+  color: var(--text-color-light);
+  font-size: 1.125rem; /* text-lg */
+}
+
+/* Right Column: Tabs, Chart, Results */
+.chart-results-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg); /* space-y equivalent */
+}
+
+/* Tabs */
+.tabs-container {
+  display: flex;
+  gap: var(--spacing-sm); /* space-x equivalent */
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--spacing-sm);
+}
+
+.tab-button {
+  padding: var(--spacing-xs) 0; /* Only bottom padding needed for border */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: var(--text-color-light);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.tab-button:hover {
+  color: var(--text-color-dark);
+}
+
+.tab-button.tab-button-active {
+  color: var(--text-color-dark);
+  border-bottom-color: var(--tab-active-border);
+  font-weight: 600;
+}
+
+/* Chart Area */
+.chart-area {
+  /* Inherits .content-card styles */
+  background-color: var(--card-bg); /* Ensure specific bg if needed */
+  box-shadow: var(--shadow-inner-soft); /* Inner shadow for chart area */
+  padding: var(--spacing-md); /* Adjust padding if needed */
+}
+
+.loading-message,
+.error-message,
+.no-data-message {
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-md); /* p-10 */
+  color: var(--text-color-medium);
+}
+
+.error-message {
+  color: #dc2626; /* Keep error color */
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 35vh; /* Maintain aspect ratio */
+}
+
+/* Warning Message under chart */
+.warning-message {
+  font-size: 0.75rem; /* text-xs */
+  color: #ea580c; /* Keep warning color */
+  font-style: italic;
+  text-align: center;
+  margin-top: var(--spacing-md);
+  padding: 0 var(--spacing-md); /* px-4 */
+}
+
+/* Results Section */
+.results-section {
+  /* Inherits .content-card styles */
+  padding: var(--spacing-lg);
+}
+
+.results-heading {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600; /* font-semibold */
+  margin-bottom: var(--spacing-lg); /* Increased margin */
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  margin-left: var(--spacing-sm); /* ml-2 */
+  font-size: 0.875rem; /* Adjusted size */
+  color: var(--text-color-light);
+  cursor: help;
+  border: 1px solid var(--text-color-light); /* Circle effect */
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.results-items {
+  font-size: 0.875rem; /* text-sm */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md); /* space-y equivalent */
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-label {
+  font-weight: 500; /* font-medium */
+  color: var(--text-color-medium);
+  margin-right: var(--spacing-md);
+}
+
+.result-value {
+  background-color: var(--results-value-bg); /* bg-gray-200 */
+  padding: var(--spacing-sm) var(--spacing-md); /* px-3 py-1 adjusted */
+  border-radius: 15px; /* Fully rounded ends like image */
+  color: var(--text-color-dark);
+  font-weight: 500;
+  min-width: 80px; /* Give it some min width */
+  text-align: center;
+}
+
+/* Responsive Design (Using Tailwind's md breakpoint: 768px) */
+@media (min-width: 768px) {
+  .main-content-grid {
+    grid-template-columns: 1fr 2fr; /* 1/3 and 2/3 layout */
+    /* grid-template-columns: repeat(3, 1fr); */ /* Original 3-col layout */
+    gap: var(--spacing-xl); /* md:gap-8 */
   }
 
-  .growth-simulation {
-    background-color: var(--darkgreen);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--white);
-    text-align: center;
+  /* If using 1/3 and 2/3 layout: */
+   .animation-area {
+      /* grid-column: span 1 / span 1; */ /* Already takes 1 column */
+       min-height: 60vh; /* md:min-h-[60vh] */
+   }
+   .chart-results-column {
+       /* grid-column: span 2 / span 2; */ /* Already takes 2 columns */
+   }
+
+  /* If using original 3-column layout: */
+  /*
+  .animation-area {
+     grid-column: span 1 / span 1;
+     min-height: 60vh;
   }
-
-  .simulation-header h1 {
-    font-size: 5rem;
-    margin-bottom: 1em;
-    font-family: "Luckiest Guy", cursive;
+  .chart-results-column {
+     grid-column: span 2 / span 2;
   }
+  */
+}
 
-  .simulation-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2em;
-    width: 80%;
-  }
-
-  .graph {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    }
-
-  .simulation-info {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    width: 100%;
-  }
-
-  .chosen-conditions {
-    background-color: var(--white);
-    color: var(--darkgreen);
-    padding: 1.5em;
-    border-radius: 10px;
-    text-align: left;
-    width: 50%;
-  }
-
-  .chosen-conditions h3 {
-    color: var(--orange);
-    font-family: "Luckiest Guy", cursive;
-    font-size: 3rem;
-    margin: 0;
-    margin-bottom: 1em;
-    padding: 0;
-  }
-
-  .chosen-conditions ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .chosen-conditions li {
-    font-size: 1.2rem;
-    margin-bottom: 0.5em;
-  }
-
-  .simulation-results {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 50%;
-    font-size: 1.2rem;
-    text-align: left;
-    margin-left: 2em;
-  }
-
-  .simulation-results p {
-    color: var(--orange);
-    font-weight: bold;
-  }
-
-  .growth-animation {
-    background-color: var(--lightgreen);
-    padding: 2em;
-    border-radius: 10px;
-    width: 25%;
-    text-align: center;
-    font-size: 1.2rem;
-  }
-
-  img {
-    width: 50%;
-    border-radius: 10px;
-  }
-
-  .view-report-button {
-    background-color: var(--orange);
-    color: var(--white);
-    border: none;
-    padding: 0.5em 1.5em;
-    font-size: 1rem;
-    border-radius: 5em;
-    cursor: pointer;
-    font-weight: bold;
-  }
-
-  .back-button {
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-right: 1em;
-  }
-
-  .simulation-header {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-  }
-
-  .selected-image{
-    width: 500px;
-    border-radius: 10px;
-  }
-
-  canvas {
-    height: 250px;
-  }
-
-  /* Media Queries for Responsiveness */
-
-  /* For small devices (mobile phones) */
-  @media (max-width: 600px) {
-    .simulation-header h1 {
-        font-size: 3rem; /* Reduce font size for smaller screens */
-    }
-
-    .simulation-info {
-        flex-direction: column; /* Stack items vertically */
-        gap: 1em; /* Reduce gap between items */
-    }
-
-    .chosen-conditions {
-        width: 90%; /* Expand chosen conditions to fit smaller screens */
-        padding: 1em; /* Adjust padding */
-    }
-
-    .chosen-conditions h3 {
-        font-size: 2rem; /* Reduce font size for smaller screens */
-    }
-
-    .chosen-conditions li {
-        font-size: 1rem; /* Adjust font size */
-    }
-
-    .simulation-results {
-        width: 90%; /* Expand simulation results to fit smaller screens */
-        margin-left: 0; /* Remove left margin */
-    }
-
-    .growth-animation {
-        width: 80%; /* Adjust animation size for smaller screens */
-        padding: 1em; /* Adjust padding */
-    }
-
-    img {
-        width: 80%; /* Adjust image size for smaller screens */
-    }
-
-    .view-report-button {
-        font-size: 0.9rem; /* Adjust button font size */
-        padding: 0.4em 1em; /* Adjust button padding */
-    }
-  }
-
-  /* For medium devices (tablets) */
-  @media (min-width: 601px) and (max-width: 1024px) {
-    .simulation-header h1 {
-        font-size: 4rem; /* Slightly smaller font size for tablets */
-    }
-
-    .simulation-info {
-        flex-direction: row; /* Keep items in a row */
-        gap: 1.5em; /* Adjust gap between items */
-    }
-
-    .chosen-conditions {
-        width: 70%; /* Adjust chosen conditions width for tablets */
-        padding: 1.2em; /* Adjust padding */
-    }
-
-    .chosen-conditions h3 {
-        font-size: 2.5rem; /* Adjust font size for tablets */
-    }
-
-    .simulation-results {
-        width: 70%; /* Adjust simulation results width for tablets */
-        margin-left: 0; /* Remove left margin */
-    }
-
-    .growth-animation {
-        width: 60%; /* Adjust animation size for tablets */
-        padding: 1.5em; /* Adjust padding */
-    }
-
-    img {
-        width: 60%; /* Adjust image size for tablets */
-    }
-
-    .view-report-button {
-        font-size: 1rem; /* Adjust button font size */
-        padding: 0.5em 1.2em; /* Adjust button padding */
-    }
-  }
-
-  /* For large devices (desktops) */
-  @media (min-width: 1025px) {
-    .simulation-header h1 {
-        font-size: 5rem; /* Keep large font size for desktops */
-    }
-
-    .simulation-info {
-        flex-direction: row; /* Keep items in a row */
-        gap: 2em; /* Keep gap between items */
-    }
-
-    .chosen-conditions {
-        width: 50%; /* Keep chosen conditions width for desktops */
-        padding: 1.5em; /* Keep padding */
-    }
-
-    .chosen-conditions h3 {
-        font-size: 3rem; /* Keep font size for desktops */
-    }
-
-    .simulation-results {
-        width: 50%; /* Keep simulation results width for desktops */
-        margin-left: 2em; /* Keep left margin */
-    }
-
-    .growth-animation {
-        width: 25%; /* Keep animation size for desktops */
-        padding: 2em; /* Keep padding */
-    }
-
-    img {
-        width: 50%; /* Keep image size for desktops */
-    }
-
-    .view-report-button {
-        font-size: 1.2rem; /* Slightly larger buttons for desktops */
-        padding: 0.6em 1.5em; /* Adjust button padding */
-    }
-  }
+.done-button {
+  background-color: var(--brown); /* Dark brown button */
+  color: var(--white);
+  font-weight: normal;
+  padding: 0.75rem 2rem; /* py-3 px-8 */
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+  transition: background-color 0.2s, transform 0.2s;
+  font-size: 1.125rem; /* text-lg */
+  border: none;
+  cursor: pointer;
+  font-family: "Lexend", sans-serif; /* Consistent font */
+  margin-top: 1em;
+}
+.done-button:hover {
+  transform: translateY(-3px); /* Slightly more lift */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Stronger shadow on hover */
+}

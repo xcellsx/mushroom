@@ -1,119 +1,150 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
 
 :root {
-    --darkgreen: #245921;
-    --lightgreen: #7E9777;
-    --white: #FFF6F6;
-    --orange: #FF914D; 
+    --yellow: #f3f2a4;
+    --lightgreen: #c5e99b;
+    --white: #fef8f0;
+    --brown: #452c0e;
+    --orange: #f0a008;
 }
-  
+
 body {
     margin: 0;
-    font-family: "Comfortaa", sans-serif;
-    background-color: var(--background-color);
-}
-  
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    font-family: "Lexend", sans-serif;
+    background-color: var(--white); /* Base background */
 }
 
 .landing-page {
-    background-color: var(--darkgreen);
-    background-image: url('../assets/images/background.png'); /* Replace with your actual image path */
+    background-image: url('../assets/images/bg-new.png'); /* Verify path */
     background-size: cover;
-    background-repeat: repeat;
-    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--white);
+    color: var(--brown);
     text-align: center;
-}
-  
-.landing-header h1 {
-    font-size: 5rem;
-    margin-bottom: 0.5em;
-    text-transform: uppercase;
-    font-family: "Luckiest Guy", cursive;
-    font-weight: 400;
-    font-style: normal;
+    position: relative; /* Needed for the ::before overlay positioning */
+    isolation: isolate; /* Create a new stacking context */
 }
 
-.landing-content{
-    height: auto;
+/* White Overlay using ::before pseudo-element */
+.landing-page::before {
+    content: ""; /* Required for pseudo-elements */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.6); /* White color with 60% opacity - Adjust opacity (0.0 to 1.0) as needed */
+    z-index: -1; /* Place the overlay behind the content but above the background image */
+}
+
+
+.navbar {
+    background-color: var(--white); /* Semi-transparent white */
+    backdrop-filter: blur(5px); /* Blur effect for the background */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.8em 1.5em; /* Use em for padding relative to font size */
+    box-sizing: border-box; /* Include padding in width/height */
+    position: sticky; /* Keeps navbar at the top */
+    top: 0;
+    z-index: 10; /* Ensure navbar is above overlay and content */
+}
+
+.logo img { /* Style the image inside the logo div if needed */
+   height: 20px; /* Example height, adjust as needed */
+   width: auto;
+}
+
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5em; /* Space between nav items */
+}
+
+.nav-link {
+    color: var(--brown);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+    color: var(--orange); /* Use defined orange color on hover */
+}
+
+/* Wrapper for the main content to center it vertically and horizontally */
+.landing-content-wrapper {
+    flex-grow: 1; /* Allows this div to take up available space */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    padding: 2em;
+    box-sizing: border-box;
+    position: relative; /* Ensure content is in the normal stacking flow */
+    z-index: 1; /* Ensure content is above the ::before overlay */
 }
 
-.start-button {
-    background-color: var(--orange);
-    color: var(--white);
+.landing-header h1 {
+    font-size: 5rem; /* Responsive font size if needed */
+    margin: 0;
+    font-family: "Lexend", sans-serif; /* Explicitly set font */
+    font-weight: 800; /* Extra-bold */
+    font-style: normal;
+    color: var(--brown);
+    text-shadow: 1px 1px 3px rgba(69, 44, 14, 0.3); /* Slightly darker shadow for better contrast */
+}
+
+.sub {
+    font-size: 2rem; /* Adjust size as needed */
+    margin: 0 0 1.5em 0; /* Only bottom margin */
+    color: var(--brown);
+}
+
+.landing-content {
+    display: flex;
+    flex-direction: row; /* Align buttons horizontally */
+    align-items: center; /* Vertically align items if they have different heights */
+    gap: 2em; /* Space between the buttons */
+}
+
+/* Shared button styles */
+.start-button,
+.view-history-button {
     border: none;
-    padding: 0.1em 1em;
-    font-size: 1em;
-    border-radius: 5em;
+    padding: 0.8em 2em; /* Generous padding */
+    font-size: 1.2rem; /* Larger font size */
+    border-radius: 1em; /* Fully rounded ends */
     cursor: pointer;
-    font-weight: bold;
-    margin-bottom: 1em;
+    font-weight: 500; /* Medium weight */
+    margin: 0; /* Remove default margins if any */
+    min-width: 200px; /* Minimum width */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15); /* Slightly more pronounced shadow */
+    font-family: "Lexend", sans-serif; /* Ensure font consistency */
+}
+
+/* Specific button styles */
+.start-button {
+    background-color: var(--yellow);
+    color: var(--brown);
 }
 
 .view-history-button {
-    background-color: var(--lightgreen);
-    color: var(--darkgreen);
-    border: none;
-    padding: 0.5em 1.5em;
-    font-size: 1rem;
-    border-radius: 5em;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    background-color: var(--white);
+    color: var(--brown);
+    /* border: 1px solid var(--brown); Optional border */
 }
 
-/* Media Queries for Responsiveness */
-
-/* For small devices (mobile phones) */
-@media (max-width: 600px) {
-    .landing-header h1 {
-        font-size: 3rem; /* Reduce font size for smaller screens */
-    }
-
-    .start-button, .view-history-button {
-        font-size: 0.9rem; /* Adjust button font size */
-        padding: 0.4em 1em; /* Adjust button padding */
-    }
-
-    .landing-page {
-        padding: 1em; /* Add padding for smaller screens */
-    }
-}
-
-/* For medium devices (tablets) */
-@media (min-width: 601px) and (max-width: 1024px) {
-    .landing-header h1 {
-        font-size: 4rem; /* Slightly smaller font size for tablets */
-    }
-
-    .start-button, .view-history-button {
-        font-size: 1rem; /* Adjust button font size */
-        padding: 0.5em 1.2em; /* Adjust button padding */
-    }
-}
-
-/* For large devices (desktops) */
-@media (min-width: 1025px) {
-    .landing-header h1 {
-        font-size: 5rem; /* Keep large font size for desktops */
-    }
-
-    .start-button, .view-history-button {
-        font-size: 1.2rem; /* Slightly larger buttons for desktops */
-        padding: 0.6em 1.5em; /* Adjust button padding */
-    }
+/* Hover effects */
+.start-button:hover,
+.view-history-button:hover {
+    transform: translateY(-3px); /* Slightly more lift */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Stronger shadow on hover */
 }

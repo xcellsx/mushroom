@@ -1,192 +1,322 @@
-.growth-report {
-  background-color: var(--darkgreen);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--white);
-  text-align: center;
+/* src/styles/GrowthReport.css */
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+/* Define CSS Variables */
+:root {
+    /* Colors (adjust as needed, based on your theme) */
+    --lightgreen-bg: rgba(197, 233, 155, 0.1); /* Light green background for sections */
+    --border-color: rgba(255, 255, 255, 0.2); /* Translucent white border */
+    --yellow: #f3f2a4;
+    --lightgreen: #c5e99b;
+    --white: #fef8f0;
+    --brown: #452c0e;
+    --orange: #f0a008;
+
+
+    /* Fonts */
+    --font-main: "Lexend", sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem; /* 4px */
+    --spacing-sm: 0.5rem;  /* 8px */
+    --spacing-md: 1rem;    /* 16px */
+    --spacing-lg: 1.5rem;  /* 24px */
+    --spacing-xl: 2rem;    /* 32px */
+
+    /* Borders */
+    --radius-md: 8px;
+    --radius-lg: 12px;
 }
 
+/* Base Styles */
+body {
+    font-family: var(--font-main);
+    margin: 0;
+    background-color: var(--white); /* Apply background to body */
+    color: var(--brown); /* Default text color */
+}
+
+/* Main Container */
+.growth-report {
+    background-color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--brown);
+    padding: var(--spacing-md) var(--spacing-lg); /* Vertical and horizontal padding */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Header */
 .report-header {
-  display: flex;
-  align-items: center;
-  gap: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Distribute items */
+    width: 100%;
+    max-width: 1200px; /* Max width for header content */
+    margin: 0 auto var(--spacing-lg) auto; /* Center header content */
+    padding: 0 var(--spacing-md); /* Padding inside header */
+    box-sizing: border-box;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: var(--spacing-md);
 }
 
 .report-header h1 {
-  font-size: 5rem;
-  margin-bottom: 1em;
-  font-family: "Luckiest Guy", cursive;
+    font-size: 2.5rem; /* Adjusted size */
+    font-family: var(--font-heading);
+    margin: 0; /* Remove default margin */
+    flex-grow: 1; /* Allow title to take space */
+    text-align: center; /* Center title */
+    color: var(--brown);
 }
 
-.back-button {
-  background: none;
-  border: none;
-  color: var(--white);
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-right: 1em;
+.batch-name-display {
+    font-size: 2em; /* Adjusted size */
+    color: var(--brown);
+    font-weight: bold;
+    text-align: center; /* Center batch name */
+    margin-top: var(--spacing-sm); /* Space above batch name */
 }
 
-.report-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2em;
-  width: 80%;
+/* Main Content Grid Layout */
+.report-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: var(--spacing-lg);
+    width: 100%;
+    max-width: 1200px; /* Max width */
+    margin: var(--spacing-lg) auto; /* Center grid */
+    flex-grow: 1; /* Allow content to take available space */
 }
 
-.chart-placeholder {
-  background-color: var(--lightgreen);
-  padding: 2em;
-  border-radius: 10px;
-  width: 50%;
-  font-size: 1.2rem;
+/* Column Styles */
+.report-left-column,
+.report-right-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg); /* Space between sections in a column */
 }
 
-.chosen-conditions {
-  text-align: left;
-  width: 50%;
-  margin-top: 2em;
+/* Section Styles */
+.report-section {
+    background-color: var(--yellow); /* Subtle background */
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
 }
 
-.chosen-conditions h3 {
-  color: var(--orange);
-  font-family: "Luckiest Guy", cursive;
-  font-size: 1.5rem;
-  margin-bottom: 1em;
+.report-section h3 {
+    font-family: var(--font-main);
+    color: var(--orange);
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--spacing-sm);
 }
 
-.chosen-conditions table {
-  width: 100%;
-  border-collapse: collapse;
+/* Specific Section Items */
+.condition-item,
+.substrate-item,
+.result-item {
+    display: flex;
+    justify-content: space-between; /* Label left, value right */
+    padding: var(--spacing-sm) 0;
+    font-size: 1rem;
+    border-bottom: 1px dashed var(--border-color); /* Separator line */
+    color: var(--brownt);
+}
+.condition-item:last-child,
+.substrate-item:last-child,
+.result-item:last-child {
+    border-bottom: none; /* Remove border for last item */
 }
 
-.chosen-conditions td {
-  padding: 0.5em;
-  border: 1px solid var(--white);
-  font-size: 1.2rem;
+.condition-item span:first-child,
+.substrate-item span:first-child,
+.result-item span:first-child {
+    font-weight: bold;
+    color: var(--brown);
+}
+
+.substrate-composition p, /* Message when no substrate data */
+.results-summary p {
+     color: var(--brown);
+}
+
+
+/* Chart Container Styles */
+.yield-chart-container {
+    /* Container for the chart section */
+    min-height: 350px; /* Ensure minimum height */
+    display: flex;
+    flex-direction: column;
+}
+.yield-chart {
+    flex-grow: 1; /* Allow chart canvas container to grow */
+    position: relative; /* Needed for chart.js responsiveness */
+    width: 100%;
+    max-width: 100%;
+}
+/* Ensure canvas respects container */
+.yield-chart canvas {
+    max-width: 100%;
+    height: auto !important; /* Override inline height if needed */
+    max-height: 300px; /* Limit chart height */
+}
+
+
+/* Footer Buttons */
+.report-footer {
+    display: flex;
+    justify-content: center; /* Center buttons */
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg) 0;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.save-report-button,
+.delete-report-button,
+.home-button {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: var(--font-main);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: var(--brown);
+}
+
+.save-report-button {
+    background-color: var(--lightgreen);
+}
+
+
+.delete-report-button {
+    background-color: var(--orange);
 }
 
 .home-button {
-  background-color: var(--orange);
-  color: var(--white);
-  border: none;
-  padding: 0.5em 1.5em;
-  font-size: 1rem;
-  border-radius: 5em;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 2em;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 2em;
+  background-color: var(--yellow);
 }
 
-/* Media Queries for Responsiveness */
+.save-report-button:hover,
+.delete-report-button:hover:hover,
+.home-button:hover {
+  transform: translateY(-3px); /* Slightly more lift */
+  box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Stronger shadow on hover */
+}
 
-/* For small devices (mobile phones) */
+
+
+
+/* --- Media Queries for Responsiveness --- */
+
+/* Medium devices (tablets, smaller desktops) */
+@media (max-width: 1024px) {
+    .report-content-grid {
+        grid-template-columns: 1fr; /* Stack columns */
+    }
+    .report-header h1 {
+        font-size: 2rem;
+    }
+    .batch-name-display {
+        font-size: 1rem;
+    }
+    .report-section h3 {
+        font-size: 1.2rem;
+    }
+    .condition-item,
+    .substrate-item,
+    .result-item {
+        font-size: 0.95rem;
+    }
+    .yield-chart-container {
+        min-height: 300px;
+    }
+}
+
+/* Small devices (mobile phones) */
 @media (max-width: 600px) {
-  .report-header h1 {
-      font-size: 3rem; /* Reduce font size for smaller screens */
-  }
+     .growth-report {
+        padding: var(--spacing-md);
+    }
+    .report-header {
+        flex-direction: column; /* Stack header items */
+        gap: var(--spacing-sm);
+        text-align: center;
+        margin-bottom: var(--spacing-md);
+    }
+     .report-header h1 {
+        font-size: 1.8rem;
+        order: 2; /* Title below buttons */
+    }
+    .logobox { /* Assuming logobox might be used in header */
+       justify-content: space-between;
+       width: 100%;
+       order: 1;
+    }
+     .back-button, .home-button-header {
+        font-size: 1.5rem;
+    }
+    .batch-name-display {
+         order: 3;
+         margin-top: var(--spacing-xs);
+    }
 
-  .chart-placeholder {
-      width: 80%; /* Adjust chart size for smaller screens */
-      padding: 1.5em; /* Adjust padding for smaller screens */
-      font-size: 1rem; /* Reduce font size */
-  }
-
-  .chosen-conditions {
-      width: 90%; /* Expand chosen conditions to fit smaller screens */
-  }
-
-  .chosen-conditions h3 {
-      font-size: 1.2rem; /* Reduce font size for smaller screens */
-  }
-
-  .chosen-conditions td {
-      font-size: 1rem; /* Adjust table font size */
-  }
-
-  .home-button {
-      font-size: 0.9rem; /* Adjust button font size */
-      padding: 0.4em 1em; /* Adjust button padding */
-  }
+    .report-content-grid {
+        gap: var(--spacing-md);
+    }
+     .report-section {
+        padding: var(--spacing-md);
+    }
+    .report-section h3 {
+        font-size: 1.1rem;
+    }
+    .condition-item,
+    .substrate-item,
+    .result-item {
+        font-size: 0.9rem;
+    }
+    .report-footer {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: center;
+    }
+    .save-report-button,
+    .delete-report-button,
+    .home-button {
+        width: 80%;
+        text-align: center;
+    }
 }
 
-/* For medium devices (tablets) */
-@media (min-width: 601px) and (max-width: 1024px) {
-  .report-header h1 {
-      font-size: 4rem; /* Slightly smaller font size for tablets */
-  }
-
-  .chart-placeholder {
-      width: 70%; /* Adjust chart size for tablets */
-      padding: 1.8em; /* Adjust padding for tablets */
-      font-size: 1.1rem; /* Adjust font size */
-  }
-
-  .chosen-conditions {
-      width: 70%; /* Adjust chosen conditions width for tablets */
-  }
-
-  .chosen-conditions h3 {
-      font-size: 1.4rem; /* Adjust font size for tablets */
-  }
-
-  .chosen-conditions td {
-      font-size: 1.1rem; /* Adjust table font size */
-  }
-
-  .home-button {
-      font-size: 1rem; /* Adjust button font size */
-      padding: 0.5em 1.2em; /* Adjust button padding */
-  }
+/* Add styles for loading/error states if needed */
+.growth-report.loading p,
+.growth-report.error-page p {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: var(--spacing-xl);
+}
+.growth-report.error-page .error-message {
+    color: var(--button-bg-delete); /* Use delete color for error message */
+    font-weight: bold;
+}
+.growth-report.error-page .home-button { /* Style home button on error page */
+     background-color: var(--orange);
+     color: var(--white);
+     border: none;
+     padding: 0.5em 1.5em;
+     font-size: 1rem;
+     border-radius: 5em;
+     cursor: pointer;
+     font-weight: bold;
+     margin-top: 2em;
 }
 
-/* For large devices (desktops) */
-@media (min-width: 1025px) {
-  .report-header h1 {
-      font-size: 5rem; /* Keep large font size for desktops */
-  }
-
-  .chart-placeholder {
-      width: 50%; /* Keep chart size for desktops */
-      padding: 2em; /* Keep padding for desktops */
-      font-size: 1.2rem; /* Keep font size for desktops */
-  }
-
-  .chosen-conditions {
-      width: 50%; /* Keep chosen conditions width for desktops */
-  }
-
-  .chosen-conditions h3 {
-      font-size: 1.5rem; /* Keep font size for desktops */
-  }
-
-  .chosen-conditions td {
-      font-size: 1.2rem; /* Keep table font size */
-  }
-
-  .home-button {
-      font-size: 1.2rem; /* Slightly larger buttons for desktops */
-      padding: 0.6em 1.5em; /* Adjust button padding */
-  }
-}
-
-.yield-chart {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 300px; /* Set a fixed height for the chart container */
-}
-
-canvas {
-  height: 250px;
-}

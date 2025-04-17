@@ -1,42 +1,92 @@
-.growth-history {
-  background-color: var(--darkgreen);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--white);
-  text-align: center;
-  height: 100vh;
+/* src/styles/GrowthSimulation.css */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+:root {
+  --border-color: #EAEAE0; /* Subtle border for cards */
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --yellow: #f3f2a4;
+  --lightgreen: #c5e99b;
+  --white: #fef8f0;
+  --brown: #452c0e;
+  --orange: #f0a008;
+
+  /* Fonts */
+  --font-main: "Lexend", sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem;  /* 8px */
+  --spacing-md: 1rem;    /* 16px */
+  --spacing-lg: 1.5rem;  /* 24px */
+  --spacing-xl: 2rem;    /* 32px */
+  --spacing-xxl: 2.5rem; /* 40px */
+
+  /* Borders */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 10px var(--shadow-color);
+  --shadow-inner-soft: inset 0 1px 3px var(--shadow-color);
 }
 
-.history-header {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  margin-top: 1em;
-  margin-bottom: 0;
+body {
+  font-family: var(--font-main);
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--brown);
+  font-size: 16px; /* Base font size */
 }
+
+/* Main container */
+.growth-history  {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  padding: var(--spacing-lg);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Header Section (Logo, Batch, Date) */
+.history-header {
+  width: 100%;
+  max-width: 1100px; /* Adjust max-width as needed */
+  text-align: center;
+}
+
+.logobox {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Max width for the logo box */
+  margin: 3em 0; /* Space above logo */
+  margin-bottom: 1em;
+}
+
 
 .history-header h1 {
   font-size: 5rem;
-  font-family: "Luckiest Guy", cursive;
 }
 
-.back-button {
+/* .back-button {
   background: none;
   border: none;
   color: var(--white);
   font-size: 1.5rem;
   cursor: pointer;
-}
+} */
 
 .history-content {
-  width: 80%;
   margin: 2em 0em;
   height: auto;
 }
 
 .history-content h3 {
-  color: var(--orange);
+  color: var(--brown);
   font-size: 3rem;
   margin-bottom: 1em;
   margin-top: 0;
@@ -51,10 +101,10 @@
 .history-item {
   display: flex;
   justify-content: space-between;
-  background-color: var(--lightgreen);
+  background-color: var(--yellow);
   padding: 1em;
   border-radius: 10px;
-  color: var(--white);
+  color: var(--brown);
   text-align: left;
   flex-wrap: wrap; /* Allow wrapping for smaller screens */
 }
