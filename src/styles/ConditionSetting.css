@@ -105,12 +105,8 @@ body {
     font-family: "Lexend", sans-serif; /* Changed font */
     margin-top: 0; /* Reset margin */
 }
-.input-card .info-icon {
-     margin-left: 0.5rem; /* ml-2 */
-     font-size: 0.75rem; /* text-xs */
-     color: #9ca3af; /* text-gray-500 */
-     cursor: help;
-}
+
+
 
 /* Input Group Styling (within cards) */
 .input-group {

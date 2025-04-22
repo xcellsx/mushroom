@@ -146,9 +146,6 @@ const ConditionSetting = () => {
         navigate('/growth-simulation');
     };
 
-    const handleBackClick = () => {
-        navigate('/'); // Navigate back to the Landing Page
-    };
 
     // Generic handler for number inputs (like Temp, pH)
     const handleNumberChange = (setter, min, max, value, allowFloat = false) => {
@@ -245,13 +242,10 @@ const ConditionSetting = () => {
         ],
     };
 
-    // --- JSX --- (structure remains the same, but values are now persistent)
+    // --- JSX ---
     return (
         <div className="condition-setting">
             <div className="logobox"> {/* Consider adding a back button here or near logo */}
-                 <button onClick={handleBackClick} className="back-button" title="Back to Home"> {/* Simple Back Button Example */}
-                    &larr; {/* Left arrow */}
-                </button>
                 <div className="logo">
                     <img src={logoSrc} alt="Logo" /> {/* Adjusted class usage */}
                 </div>
@@ -264,6 +258,16 @@ const ConditionSetting = () => {
             <main className="condition-main-content">
                 {/* Left Column: Inputs */}
                 <div className="left-column">
+                    {/* optimal conditions */}
+                    <div className="input-card">
+                    <h3>
+                    Allowable Range of Values
+                    <span className="info-icon" title="Values you can set for the sections below">(i)</span>
+                    </h3>
+                    <p>Temperature (°C) : 20 - 40</p>
+                    <p>pH : 6 - 7</p>
+                    <p>Substrate Weight : Any weight more than 200g</p>
+</div>
                     {/* Environmental Conditions */}
                     <div className="input-card">
                          <h3>
@@ -271,14 +275,14 @@ const ConditionSetting = () => {
                             <span className="info-icon" title="Set temperature (20-40°C) and pH (6.0-7.0) for growth">(i)</span>
                         </h3>
                         <div className="input-group">
-                             <label htmlFor="temperature">Temperature (°C):</label>
-                            <input
-                                id="temperature" type="number" min="20" max="30" step="1"
-                                value={temperature} // Controlled component
-                                // Use the updated handler
-                                onChange={(e) => handleNumberChange(setTemperature, 20, 40, e.target.value)}
-                            />
-                        </div>
+    <label htmlFor="temperature">Temperature (°C):</label>
+    <input
+        id="temperature" type="number" min="20" max="40" step="1" // <-- Changed max from 30 to 40
+        value={temperature} // Controlled component
+        // The handler already correctly uses 20 and 40 as min/max
+        onChange={(e) => handleNumberChange(setTemperature, 20, 40, e.target.value)}
+    />
+</div>
                         <div className="input-group">
                             <label htmlFor="ph">pH:</label>
                             <input

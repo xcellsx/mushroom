@@ -211,7 +211,6 @@ body {
   font-size: 0.875rem; /* Adjusted size */
   color: var(--text-color-light);
   cursor: help;
-  border: 1px solid var(--text-color-light); /* Circle effect */
   border-radius: 50%;
   width: 16px;
   height: 16px;

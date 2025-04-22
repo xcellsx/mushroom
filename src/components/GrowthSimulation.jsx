@@ -328,7 +328,7 @@ const GrowthSimulation = () => {
 
                     {/* Results Section */}
                     <div className="results-section content-card">
-                        <h3 className="results-heading"> Simulation Results <span className="info-icon" title="Projected yield is based on the Mushroom phase simulation. End date calculated from start date and duration.">i</span> </h3>
+                        <h3 className="results-heading"> Simulation Results <span className="info-icon" title="Projected yield is based on the Mushroom phase simulation. End date calculated from start date and duration.">(i)</span> </h3>
                         <div className="results-items">
                             <div className="result-item"> <span className="result-label">Projected Yield:</span> <span className="result-value"> {isLoading ? '...' : error ? 'Error' : (finalSimulatedYield !== null && Number.isFinite(finalSimulatedYield)) ? `${finalSimulatedYield.toFixed(1)}g` : 'N/A'} </span> </div>
                             <div className="result-item"> <span className="result-label">Projected End Date:</span> <span className="result-value"> {isLoading ? '...' : error ? 'Error' : endDate} </span> </div>
