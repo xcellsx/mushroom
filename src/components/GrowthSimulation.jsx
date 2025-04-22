@@ -189,9 +189,6 @@ const GrowthSimulation = () => {
         return () => { isMounted = false; };
     }, []); // Empty dependency array ensures this runs only once on mount
 
-    // --- Event Handlers ---
-    const handleBackClick = () => navigate('/condition-setting'); // Go back to settings
-
     /**
      * Saves the current simulation results to localStorage and navigates to the landing page.
      */
@@ -238,54 +235,178 @@ const GrowthSimulation = () => {
     /**
      * Handles clicks on chart points, displaying images based on time ranges.
      */
-    const handleChartClick = (event) => {
-        const chart = chartRef.current; if (!chart) return;
-        const elements = getElementAtEvent(chart, event);
-        if (elements.length > 0) {
-            const { datasetIndex, index } = elements[0];
-            const dataset = chart.config.data.datasets[datasetIndex];
-            const dataPoint = dataset?.data[index];
-            if (dataPoint && activeChartTab === 'yield') {
-                const clickedTime = dataPoint.x;
-                if (clickedTime >= 0 && clickedTime < 2) { setAnimationImageSrc(asset1Src); }
-                else if (clickedTime >= 8 && clickedTime < 15) { setAnimationImageSrc(day1Src); }
-                else if (clickedTime >= 35 && clickedTime < 40) { setAnimationImageSrc(day5Src); }
-                else { setAnimationImageSrc(null); }
-            } else { setAnimationImageSrc(null); }
+/**
+ * Handles clicks on chart points, displaying images based on time ranges.
+ */
+const handleChartClick = (event) => {
+    const chart = chartRef.current; if (!chart) return;
+    const elements = getElementAtEvent(chart, event);
+
+    if (elements.length > 0) {
+        const { datasetIndex, index } = elements[0];
+        const dataset = chart.config.data.datasets[datasetIndex];
+        const dataPoint = dataset?.data[index];
+
+        // Only proceed if we have a data point and the 'yield' tab is active
+        if (dataPoint && activeChartTab === 'yield') {
+            const clickedTime = dataPoint.x;
+
+            // --- Calculate the dynamic start time for the last image range ---
+            // Ensure simDuration is a valid number before calculating
+            const isDurationValid = simDuration !== null && Number.isFinite(simDuration);
+            // Calculate the start time (simDuration - 5). Default to an impossible value if duration isn't valid.
+            const lastImageStartTime = isDurationValid ? simDuration - 5 : -1;
+
+            // --- Check time ranges ---
+            if (clickedTime >= 0 && clickedTime < 2) {
+                setAnimationImageSrc(asset1Src); // First range (Day 0-1)
+            } else if (clickedTime >= 8 && clickedTime < 15) {
+                setAnimationImageSrc(day1Src);   // Second range (Day 8-14)
+            // --- *** UPDATED Condition for the last image *** ---
+            } else if (
+                isDurationValid &&                 // Check if duration is valid
+                clickedTime >= lastImageStartTime && // Check if click time is >= (duration - 5)
+                clickedTime <= simDuration           // Check if click time is <= duration (inclusive)
+            ) {
+                setAnimationImageSrc(day5Src);   // Last range (Duration-5 to Duration)
+            } else {
+                // If clicked time doesn't fall into any specific range
+                setAnimationImageSrc(null);
+            }
+        } else {
+             // If not on the 'yield' tab or no data point clicked
+            setAnimationImageSrc(null);
         }
+    } else {
+        // If click was not on a chart element
+         setAnimationImageSrc(null);
+    }
+};
+
+// --- Chart Configuration Function ---
+const getChartConfig = () => {
+    // (Chart config logic - colors, fonts, etc. remain the same)
+    const currentResultsSource = activeChartTab === 'mycelium' ? simulationResultsMycelium : simulationResultsMushroom;
+    const yieldColor = '#2E7D32'; const tempColor = '#C62828'; const myceliumColor = '#1976D2';
+    const textColor = '#333'; const gridColor = 'rgba(0, 0, 0, 0.08)';
+    const font = { family: 'Lexend', weight: '300' };
+
+    // *** REMOVED central xAxisMax calculation ***
+
+    const options = {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: true, labels: { color: textColor, font: font } }, tooltip: { enabled: true, bodyFont: font, titleFont: font }, title: { display: true, text: '', color: textColor, font: { ...font, size: 16, weight: '500'} } },
+        scales: {
+            x: {
+                type: 'linear',
+                title: { display: true, text: 'Time (Days)', color: textColor, font: font },
+                ticks: { color: textColor, font: font, precision: 0 },
+                grid: { color: gridColor },
+                min: 0,
+                // *** max will be set conditionally below within the switch statement ***
+                max: undefined // Initialize as undefined
+            },
+            // --- Y-Axis definitions (unchanged) ---
+            yYield: { type: 'linear', position: 'left', title: { display: true, text: 'Mushroom Yield (g)', color: yieldColor, font: font }, ticks: { color: yieldColor, font: font }, grid: { drawOnChartArea: true, color: gridColor }, beginAtZero: true, display: false },
+            yTemp: { type: 'linear', position: 'left', title: { display: true, text: 'Temperature (°C)', color: tempColor, font: font }, ticks: { color: tempColor, font: font }, grid: { drawOnChartArea: false }, display: false },
+            yMycelium: { type: 'linear', position: 'left', title: { display: true, text: 'Mycelium Density', color: myceliumColor, font: font }, ticks: { color: myceliumColor, font: font, callback: (value) => value.toFixed(2) }, grid: { drawOnChartArea: true, color: gridColor }, beginAtZero: true, suggestedMax: 1, display: false }
+        },
+        interaction: { mode: 'nearest', axis: 'x', intersect: false },
     };
 
-    // --- Chart Configuration Function ---
-    const getChartConfig = () => {
-        // (Chart config logic remains the same as previous version)
-        const currentResultsSource = activeChartTab === 'mycelium' ? simulationResultsMycelium : simulationResultsMushroom;
-        const yieldColor = '#2E7D32'; const tempColor = '#C62828'; const myceliumColor = '#1976D2';
-        const textColor = '#333'; const gridColor = 'rgba(0, 0, 0, 0.08)';
-        const font = { family: 'Lexend', weight: '300' };
-        const options = {
-            responsive: true, maintainAspectRatio: false,
-            plugins: { legend: { display: true, labels: { color: textColor, font: font } }, tooltip: { enabled: true, bodyFont: font, titleFont: font }, title: { display: true, text: '', color: textColor, font: { ...font, size: 16, weight: '500'} } },
-            scales: {
-                x: { type: 'linear', title: { display: true, text: 'Time (Days)', color: textColor, font: font }, ticks: { color: textColor, font: font, precision: 0 }, grid: { color: gridColor }, min: 0, max: undefined }, // x-axis precision is 0
-                yYield: { type: 'linear', position: 'left', title: { display: true, text: 'Mushroom Yield (g)', color: yieldColor, font: font }, ticks: { color: yieldColor, font: font }, grid: { drawOnChartArea: true, color: gridColor }, beginAtZero: true, display: false },
-                yTemp: { type: 'linear', position: 'left', title: { display: true, text: 'Temperature (°C)', color: tempColor, font: font }, ticks: { color: tempColor, font: font }, grid: { drawOnChartArea: false }, display: false },
-                yMycelium: { type: 'linear', position: 'left', title: { display: true, text: 'Mycelium Density', color: myceliumColor, font: font }, ticks: { color: myceliumColor, font: font, callback: (value) => value.toFixed(2) }, grid: { drawOnChartArea: true, color: gridColor }, beginAtZero: true, suggestedMax: 1, display: false }
-            },
-            interaction: { mode: 'nearest', axis: 'x', intersect: false },
-        };
-        options.scales.yYield.display = false; options.scales.yTemp.display = false; options.scales.yMycelium.display = false;
-        if (!currentResultsSource || currentResultsSource.length === 0) { return { data: { datasets: [] }, options: options }; }
-        let datasets = []; let chartData = [...currentResultsSource]; let dataSourceName = '';
-        switch (activeChartTab) {
-            case 'yield': dataSourceName = 'Mushroom Sim'; options.plugins.title.text = `Yield Over Time (${dataSourceName})`; options.scales.yYield.display = true; datasets = [{ label: 'Mushroom Yield (g)', data: chartData.map(p => ({ x: p.time, y: Number.isFinite(p.MushroomYield) ? p.MushroomYield : null })), borderColor: yieldColor, backgroundColor: 'rgba(46, 125, 50, 0.1)', yAxisID: 'yYield', }]; options.scales.x.max = chartData.length > 0 ? chartData[chartData.length - 1].time : undefined; break;
-            case 'temp': dataSourceName = 'Mushroom Sim'; options.plugins.title.text = `Temperature Over Time (${dataSourceName})`; options.scales.yTemp.display = true; datasets = [{ label: 'Temperature (°C)', data: chartData.map(p => ({ x: p.time, y: Number.isFinite(p.Temp) ? p.Temp : null })), borderColor: tempColor, backgroundColor: 'rgba(198, 40, 40, 0.1)', yAxisID: 'yTemp', }]; options.scales.x.max = chartData.length > 0 ? chartData[chartData.length - 1].time : undefined; break;
-            case 'mycelium': dataSourceName = 'Mycelium Sim'; options.plugins.title.text = `Mycelium Growth (${dataSourceName})`; options.scales.yMycelium.display = true; let cutoffIndex = chartData.findIndex(p => p.Mycelium >= 0.9); let finalTime = chartData.length > 0 ? chartData[chartData.length - 1].time : 0; let cutoffReason = "Simulation End"; if (cutoffIndex !== -1) { chartData = chartData.slice(0, cutoffIndex + 1); finalTime = chartData[chartData.length - 1].time; cutoffReason = "Mycelium >= 0.9"; } else { const day30Index = chartData.findIndex(p => p.time >= 30); if (day30Index !== -1) { chartData = chartData.slice(0, day30Index + 1); finalTime = chartData[chartData.length - 1].time; cutoffReason = "Day 30 Limit"; } } options.scales.x.max = finalTime; if (cutoffReason !== "Simulation End") { options.plugins.title.text += ` (Stopped at ${cutoffReason})`; } datasets = [{ label: 'Mycelium Density', data: chartData.map(p => ({ x: p.time, y: Number.isFinite(p.Mycelium) ? p.Mycelium : null })), borderColor: myceliumColor, backgroundColor: 'rgba(25, 118, 210, 0.1)', yAxisID: 'yMycelium', }]; break;
-            default: datasets = [];
-        }
-        const finalDatasets = datasets && datasets.length > 0 ? datasets.map(ds => ({ ...ds, tension: 0.1, pointRadius: ds.data?.length > 150 ? 0.5 : (ds.data?.length > 50 ? 1 : 2), pointHoverRadius: 4, borderWidth: 1.5, spanGaps: true })).filter(ds => ds.data && ds.data.length > 0) : [];
-        return { data: { datasets: finalDatasets }, options: options };
-    };
-    // --- End getChartConfig function ---
+    // --- Toggle Y-Axis visibility (unchanged) ---
+    options.scales.yYield.display = false; options.scales.yTemp.display = false; options.scales.yMycelium.display = false;
+
+    // --- Handle case where simulation data isn't ready (unchanged) ---
+    if (!currentResultsSource || currentResultsSource.length === 0) {
+        return { data: { datasets: [] }, options: options };
+    }
+
+    let datasets = [];
+    let chartData = [...currentResultsSource]; // Use a copy
+    let dataSourceName = '';
+
+    // --- Prepare datasets and set X-axis max based on active tab ---
+    switch (activeChartTab) {
+        case 'yield':
+            dataSourceName = 'Mushroom Sim';
+            options.plugins.title.text = `Yield Over Time (${dataSourceName})`;
+            options.scales.yYield.display = true; // Show correct Y-axis
+            datasets = [{ /* ... yield dataset definition ... */
+                label: 'Mushroom Yield (g)',
+                data: chartData.map(p => ({ x: p.time, y: Number.isFinite(p.MushroomYield) ? p.MushroomYield : null })),
+                borderColor: yieldColor, backgroundColor: 'rgba(46, 125, 50, 0.1)', yAxisID: 'yYield',
+            }];
+            // *** Set X-axis max for Yield tab ***
+            options.scales.x.max = (simDuration !== null && Number.isFinite(simDuration)) ? simDuration + 10 : undefined;
+            break;
+
+        case 'temp':
+            dataSourceName = 'Mushroom Sim';
+            options.plugins.title.text = `Temperature Over Time (${dataSourceName})`;
+            options.scales.yTemp.display = true; // Show correct Y-axis
+            datasets = [{ /* ... temp dataset definition ... */
+                label: 'Temperature (°C)',
+                data: chartData.map(p => ({ x: p.time, y: Number.isFinite(p.Temp) ? p.Temp : null })),
+                borderColor: tempColor, backgroundColor: 'rgba(198, 40, 40, 0.1)', yAxisID: 'yTemp',
+            }];
+            // *** Set X-axis max for Temp tab ***
+            options.scales.x.max = (simDuration !== null && Number.isFinite(simDuration)) ? simDuration + 10 : undefined;
+            break;
+
+        case 'mycelium':
+            dataSourceName = 'Mycelium Sim';
+            options.plugins.title.text = `Mycelium Growth (${dataSourceName})`;
+            options.scales.yMycelium.display = true; // Show correct Y-axis
+
+            // --- Mycelium Cutoff Logic for DATA (remains the same) ---
+            let cutoffIndex = chartData.findIndex(p => p.Mycelium >= 0.9);
+            let cutoffReason = "Simulation End";
+            if (cutoffIndex !== -1) {
+                chartData = chartData.slice(0, cutoffIndex + 1); // Cut data for display
+                cutoffReason = "Mycelium >= 0.9";
+            } else {
+                const day30Index = chartData.findIndex(p => p.time >= 30);
+                if (day30Index !== -1) {
+                    chartData = chartData.slice(0, day30Index + 1); // Cut data for display
+                    cutoffReason = "Day 30 Limit";
+                }
+            }
+             if (cutoffReason !== "Simulation End") {
+                 options.plugins.title.text += ` (Stopped at ${cutoffReason})`;
+             }
+            // *** Dataset uses potentially shortened 'chartData' ***
+            datasets = [{ /* ... mycelium dataset definition ... */
+                label: 'Mycelium Density',
+                data: chartData.map(p => ({ x: p.time, y: Number.isFinite(p.Mycelium) ? p.Mycelium : null })),
+                borderColor: myceliumColor, backgroundColor: 'rgba(25, 118, 210, 0.1)', yAxisID: 'yMycelium',
+            }];
+
+            // *** Set specific X-axis max for Mycelium tab ***
+            options.scales.x.max = 30;
+            break;
+
+        default:
+            datasets = [];
+            // Set a default max if needed, or leave as undefined
+            options.scales.x.max = (simDuration !== null && Number.isFinite(simDuration)) ? simDuration + 10 : undefined;
+    }
+
+    // --- Final dataset styling (unchanged) ---
+    const finalDatasets = datasets && datasets.length > 0
+        ? datasets.map(ds => ({ /* ... styling ... */
+            ...ds,
+            tension: 0.1,
+            pointRadius: ds.data?.length > 150 ? 0.5 : (ds.data?.length > 50 ? 1 : 2),
+            pointHoverRadius: 4,
+            borderWidth: 1.5,
+            spanGaps: true
+        })).filter(ds => ds.data && ds.data.length > 0)
+        : [];
+
+    return { data: { datasets: finalDatasets }, options: options };
+};
+// --- End getChartConfig function ---
 
 
     // --- Render Logic ---

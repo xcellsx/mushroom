@@ -84,10 +84,6 @@ body {
     color: var(--text-color-dark);
 }
 
-.batch-info .start-date {
-    /* Style for Start Date if needed */
-}
-
 
 /* Main Content Grid */
 .main-content-grid {
